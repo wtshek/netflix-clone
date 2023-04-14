@@ -1,6 +1,9 @@
 import { Input } from "@/components/Input";
+import axios from "axios";
 import Image from "next/image";
 import { useCallback, useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const LOGO_WIDTH = 100;
 const LOGO_HEIGHT = 48;
@@ -11,17 +14,48 @@ enum VariantEnum {
 }
 
 const Auth = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const [variant, setVariant] = useState<VariantEnum>(VariantEnum.Login);
+  const isLogin = variant === VariantEnum.Login;
+  const isRegister = variant === VariantEnum.Register;
 
   const toggleVariant = useCallback(() => {
     setVariant((curr) =>
       curr === VariantEnum.Login ? VariantEnum.Register : VariantEnum.Login
     );
   }, []);
+
+  const login = useCallback(async () => {
+    try {
+      await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+        callbackUrl: "/",
+      });
+
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  }, [email, password, router]);
+
+  const register = useCallback(async () => {
+    try {
+      await axios.post("/api/register", {
+        email,
+        password,
+        name: username,
+      });
+      login();
+    } catch (error) {
+      console.log(error);
+    }
+  }, [email, password, username, login]);
 
   const onValueChange =
     (cb: (str: string) => void) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,10 +76,10 @@ const Auth = () => {
         <div className="flex justify-center">
           <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
             <h2 className="text-white text-4xl font-semibold mb-8">
-              {variant === VariantEnum.Login ? "Sign In" : "Register"}
+              {isLogin ? "Sign In" : "Register"}
             </h2>
             <div className="flex flex-col gap-4">
-              {variant === VariantEnum.Register && (
+              {isRegister && (
                 <Input
                   label="Username"
                   onChange={onValueChange(setUsername)}
@@ -69,18 +103,21 @@ const Auth = () => {
                 value={password}
               />
             </div>
-            <button className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition">
-              {variant === VariantEnum.Login ? "Login" : "Sign up"}
+            <button
+              onClick={isLogin ? login : register}
+              className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
+            >
+              {isLogin ? "Login" : "Sign up"}
             </button>
             <p className="text-neutral-500 mt-12">
-              {variant === VariantEnum.Login
+              {isLogin
                 ? "First time using Netflix?"
                 : "Already have an account?"}
               <span
                 className="text-white ml-1 hover:underline cursor-pointer"
                 onClick={toggleVariant}
               >
-                {variant === VariantEnum.Login ? "Create an account" : "Login"}
+                {isLogin ? "Create an account" : "Login"}
               </span>
             </p>
           </div>
