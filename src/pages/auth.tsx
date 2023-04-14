@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useCallback, useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 const LOGO_WIDTH = 100;
 const LOGO_HEIGHT = 48;
@@ -57,6 +59,13 @@ const Auth = () => {
     }
   }, [email, password, username, login]);
 
+  const onGithubSignInClick = () => {
+    signIn("github", { callbackUrl: "/" });
+  };
+  const onGoogleSignInClick = () => {
+    signIn("google", { callbackUrl: "/" });
+  };
+
   const onValueChange =
     (cb: (str: string) => void) => (e: React.ChangeEvent<HTMLInputElement>) => {
       cb(e.target.value);
@@ -109,6 +118,14 @@ const Auth = () => {
             >
               {isLogin ? "Login" : "Sign up"}
             </button>
+            <div className="flex flex-row items-center gap-4 mt-8 justify-center">
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+                <FcGoogle size={30} onClick={onGoogleSignInClick} />
+              </div>
+              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+                <FaGithub size={30} onClick={onGithubSignInClick} />
+              </div>
+            </div>
             <p className="text-neutral-500 mt-12">
               {isLogin
                 ? "First time using Netflix?"
