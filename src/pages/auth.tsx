@@ -3,9 +3,9 @@ import axios from "axios";
 import Image from "next/image";
 import { useCallback, useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { Paths } from "@/utils/types";
 
 const LOGO_WIDTH = 100;
 const LOGO_HEIGHT = 48;
@@ -16,7 +16,6 @@ enum VariantEnum {
 }
 
 const Auth = () => {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -37,14 +36,12 @@ const Auth = () => {
         email,
         password,
         redirect: false,
-        callbackUrl: "/",
+        callbackUrl: Paths.Profiles,
       });
-
-      router.push("/");
     } catch (error) {
       console.log(error);
     }
-  }, [email, password, router]);
+  }, [email, password]);
 
   const register = useCallback(async () => {
     try {
@@ -60,10 +57,10 @@ const Auth = () => {
   }, [email, password, username, login]);
 
   const onGithubSignInClick = () => {
-    signIn("github", { callbackUrl: "/" });
+    signIn("github", { callbackUrl: Paths.Profiles });
   };
   const onGoogleSignInClick = () => {
-    signIn("google", { callbackUrl: "/" });
+    signIn("google", { callbackUrl: Paths.Profiles });
   };
 
   const onValueChange =
