@@ -1,13 +1,11 @@
-import useCurrentUser from "@/hooks/useCurrentUser";
-import { Paths } from "@/utils/types";
+import { useCallback } from "react";
 import { NextPageContext } from "next";
-import { getSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useCallback } from "react";
-
-const PROFILE_WIDTH = 176;
-const PROFILE_HEIGHT = 176;
+import { getSession } from "next-auth/react";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import { Paths } from "@/utils/types";
+import { PROFILE_WIDTH, PROFILE_HEIGHT } from "@/utils/constant";
 
 const Profiles = () => {
   const router = useRouter();

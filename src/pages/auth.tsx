@@ -6,9 +6,7 @@ import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { Paths } from "@/utils/types";
-
-const LOGO_WIDTH = 100;
-const LOGO_HEIGHT = 48;
+import { LOGO_WIDTH, LOGO_HEIGHT } from "@/utils/constant";
 
 enum VariantEnum {
   Login = "login",
