@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { NextApiRequest, NextApiResponse } from "next";
 import prismadb from "@/lib/prismadb";
+import { RequestMethods, ResponseStatus } from "@/utils/types";
 
 const BCRYPT_HASH = 12;
 
@@ -8,8 +9,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "POST") {
-    return res.status(405).end();
+  if (req.method !== RequestMethods.POST) {
+    return res.status(ResponseStatus.NOT_ALLOWED).end();
   }
 
   try {
@@ -21,7 +22,9 @@ export default async function handler(
     });
 
     if (existingUser) {
-      return res.status(422).json({ error: "Email taken" });
+      return res
+        .status(ResponseStatus.UNPROCESSABLE)
+        .json({ error: "Email taken" });
     }
 
     const hashedPassword = await bcrypt.hash(password, BCRYPT_HASH);
@@ -36,9 +39,9 @@ export default async function handler(
       },
     });
 
-    return res.status(200).json(user);
+    return res.status(ResponseStatus.CREATED).json(user);
   } catch (error) {
     console.log(error);
-    return res.status(400).end();
+    return res.status(ResponseStatus.BAD_REQUEST).end();
   }
 }
