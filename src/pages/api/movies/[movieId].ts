@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import serverAuth from "@/lib/serverAuth";
 import { RequestMethods, ResponseStatus } from "@/utils/types";
+import serverAuth from "@/lib/serverAuth";
+import prismadb from "@/lib/prismadb";
 
 export default async function handler(
   req: NextApiRequest,
