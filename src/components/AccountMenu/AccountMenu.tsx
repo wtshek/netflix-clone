@@ -1,7 +1,7 @@
-import useCurrentUser from "@/hooks/useCurrentUser";
-import { signOut } from "next-auth/react";
-import Image from "next/image";
-import React from "react";
+import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { signOut } from 'next-auth/react';
+import Image from 'next/image';
+import React from 'react';
 
 interface AccountMenuProps {
   visible: boolean;
@@ -10,7 +10,7 @@ interface AccountMenuProps {
 const PROFILE_PIC_WIDTH = 32;
 const PROFILE_PIC_HEIGHT = 32;
 
-const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
+export const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const { data: currentUser } = useCurrentUser();
   const onLogoutClick = () => signOut();
 
@@ -31,12 +31,12 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
           </p>
         </div>
         <hr className="bg-gray-600 border-0 h-px my-4" />
-        <div
+        <button
           onClick={onLogoutClick}
           className="px-3 text-center text-white text-sm hover:underline"
         >
           Sign out
-        </div>
+        </button>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
-import { useCallback } from "react";
-import { NextPageContext } from "next";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { getSession } from "next-auth/react";
-import useCurrentUser from "@/hooks/useCurrentUser";
-import { Paths } from "@/utils/types";
-import { PROFILE_WIDTH, PROFILE_HEIGHT } from "@/utils/constant";
+import { useCallback } from 'react';
+import { NextPageContext } from 'next';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { getSession } from 'next-auth/react';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { Paths } from '@/utils/types';
+import { PROFILE_WIDTH, PROFILE_HEIGHT } from '@/utils/constant';
 
 const Profiles = () => {
   const router = useRouter();
@@ -50,7 +50,7 @@ export async function getServerSideProps(context: NextPageContext) {
   if (!session) {
     return {
       redirect: {
-        destination: "/auth",
+        destination: '/auth',
         permanent: false,
       },
     };

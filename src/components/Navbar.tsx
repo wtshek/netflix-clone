@@ -1,21 +1,21 @@
-import { useCallback, useEffect, useState } from "react";
-import Image from "next/image";
-import { BsBell, BsChevronDown, BsSearch } from "react-icons/bs";
-import { LOGO_WIDTH, LOGO_HEIGHT } from "@/utils/constant";
-import { PROFILE_WIDTH, PROFILE_HEIGHT } from "@/utils/constant";
-import NavbarItem from "./NavbarItem";
-import MobileMenu from "./MobileMenu";
-import AccountMenu from "./AccountMenu";
+import { useCallback, useEffect, useState } from 'react';
+import Image from 'next/image';
+import { BsBell, BsChevronDown, BsSearch } from 'react-icons/bs';
+import { LOGO_WIDTH, LOGO_HEIGHT } from '@/utils/constant';
+import { PROFILE_WIDTH, PROFILE_HEIGHT } from '@/utils/constant';
+import NavbarItem from './NavbarItem';
+import MobileMenu from './MobileMenu';
+import { AccountMenu } from './AccountMenu';
 
 const TOP_OFFSET = 66;
 
 const navbarItems = [
-  "Home",
-  "Series",
-  "Films",
-  "New & Popular",
-  "My List",
-  "Browse by languages",
+  'Home',
+  'Series',
+  'Films',
+  'New & Popular',
+  'My List',
+  'Browse by languages',
 ];
 
 const Navbar: React.FC = () => {
@@ -35,16 +35,16 @@ const Navbar: React.FC = () => {
       setIsNavbarBackgroundShown(window.scrollY >= TOP_OFFSET);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <nav className="w-full fixed z-40">
       <div
         className={`px-4 md:px-16 py-6 flex flex-row items-center transition duration-500  ${
-          isNavbarBackgroundShown ? "bg-zinc-900 bg-opacity-90" : ""
+          isNavbarBackgroundShown ? 'bg-zinc-900 bg-opacity-90' : ''
         }`}
       >
         <Image
@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
           </p>
           <BsChevronDown
             className={`text-white transition ${
-              isMobileMenuVisible ? "rotate-180" : "rotate-0"
+              isMobileMenuVisible ? 'rotate-180' : 'rotate-0'
             }`}
           />
           <MobileMenu visible={isMobileMenuVisible} items={navbarItems} />
@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
             </div>
             <BsChevronDown
               className={`text-white transition ${
-                isAccountMenuShown ? "rotate-180" : "rotate-0"
+                isAccountMenuShown ? 'rotate-180' : 'rotate-0'
               }`}
             />
             <AccountMenu visible={isAccountMenuShown} />
