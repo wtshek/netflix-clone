@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
-import PlayButton from './PlayButton';
-import FavoriteButton from './FavoriteButton';
+import PlayButton from '@/components/PlayButton';
+import { FavoriteButton } from '@/components/FavoriteButton';
 import { useInfoModal } from '@/hooks/useInfoModal';
-import useMovie from '@/hooks/useMovie';
+import { useMovie } from '@/hooks/useMovie';
 
 const HANDLE_CLOSE_TIMEOUT = 300;
 const CLOSE_ICON_SIZE = 20;
@@ -13,7 +13,7 @@ interface InfoModalProps {
   onClose: () => void;
 }
 
-const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
+export const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
   const [isVisible, setIsVisible] = useState(visible);
   const { movieId } = useInfoModal();
   const { data = {} } = useMovie(movieId as string);
@@ -49,6 +49,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
               className="w-full brightness-[60%] object-cover h-full"
             />
             <div
+              data-testid="close-icon"
               onClick={handleClose}
               className="cursor-pointer absolute top-3 right-3 h-10 w-10 rounded-full bg-black bg-opacity-70 flex items-center justify-center"
             >
@@ -78,5 +79,3 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     </div>
   );
 };
-
-export default InfoModal;

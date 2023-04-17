@@ -1,7 +1,7 @@
-import useMovie from "@/hooks/useMovie";
-import { useRouter } from "next/router";
-import { useCallback } from "react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useMovie } from '@/hooks/useMovie';
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 const Watch = () => {
   const router = useRouter();
@@ -10,7 +10,7 @@ const Watch = () => {
   const { data } = useMovie(movieId as string);
 
   const onBackClick = useCallback(() => {
-    router.push("/");
+    router.push('/');
   }, []);
 
   return (
