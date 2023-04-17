@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { BsBell, BsChevronDown, BsSearch } from 'react-icons/bs';
 import { LOGO_WIDTH, LOGO_HEIGHT } from '@/utils/constant';
 import { PROFILE_WIDTH, PROFILE_HEIGHT } from '@/utils/constant';
-import NavbarItem from './NavbarItem';
-import MobileMenu from './MobileMenu';
-import { AccountMenu } from './AccountMenu';
+import { NavbarItem } from '@/components/NavbarItem';
+import { MobileMenu } from '@/components/MobileMenu';
+import { AccountMenu } from '@/components/AccountMenu';
 
 const TOP_OFFSET = 66;
 
@@ -18,7 +18,7 @@ const navbarItems = [
   'Browse by languages',
 ];
 
-const Navbar: React.FC = () => {
+export const Navbar: React.FC = () => {
   const [isMobileMenuVisible, setIsMobileMenuVisible] = useState(false);
   const [isAccountMenuShown, setIsAccountMenuShown] = useState(false);
   const [isNavbarBackgroundShown, setIsNavbarBackgroundShown] = useState(false);

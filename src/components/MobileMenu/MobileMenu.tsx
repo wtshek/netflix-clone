@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 interface MobileMenuProps {
   visible: boolean;
   items: string[];
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ visible, items }) => {
+export const MobileMenu: React.FC<MobileMenuProps> = ({ visible, items }) => {
   if (!visible) {
     return <></>;
   }
@@ -25,5 +25,3 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ visible, items }) => {
     </div>
   );
 };
-
-export default MobileMenu;

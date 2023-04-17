@@ -1,6 +1,6 @@
 import { useBillboard } from '@/hooks/useBillboard';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
-import PlayButton from '../PlayButton';
+import { PlayButton } from '../PlayButton';
 import { useInfoModal } from '@/hooks/useInfoModal';
 import { useCallback } from 'react';
 

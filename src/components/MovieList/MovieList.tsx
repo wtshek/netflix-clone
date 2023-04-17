@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash';
-import MovieCard from './MovieCard';
+import { MovieCard } from '@/components/MovieCard';
 import { MovieType } from '@/utils/types';
 
 interface MovieListProps {
@@ -7,7 +7,7 @@ interface MovieListProps {
   title: string;
 }
 
-const MovieList: React.FC<MovieListProps> = ({ data, title }) => {
+export const MovieList: React.FC<MovieListProps> = ({ data, title }) => {
   if (isEmpty(data)) return null;
 
   return (
@@ -18,12 +18,10 @@ const MovieList: React.FC<MovieListProps> = ({ data, title }) => {
         </p>
         <div className="grid grid-cols-4 gap-2">
           {data.map((movie) => (
-            <MovieCard key={movie.id} data={movie} />
+            <MovieCard key={movie.id} data={movie} data-testid="movie-card" />
           ))}
         </div>
       </div>
     </div>
   );
 };
-
-export default MovieList;

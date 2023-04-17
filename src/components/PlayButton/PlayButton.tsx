@@ -8,7 +8,7 @@ interface PlayButtonProps {
 
 const PLAY_BUTTON_ICON_SIZE = 25;
 
-const PlayButton: React.FC<PlayButtonProps> = ({ movieId }) => {
+export const PlayButton: React.FC<PlayButtonProps> = ({ movieId }) => {
   const router = useRouter();
 
   const onClick = useCallback(() => {
@@ -23,5 +23,3 @@ const PlayButton: React.FC<PlayButtonProps> = ({ movieId }) => {
     </button>
   );
 };
-
-export default PlayButton;

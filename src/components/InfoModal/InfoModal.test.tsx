@@ -61,14 +61,4 @@ describe('InfoModal component', () => {
     });
     expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
-
-  it('should not render when visible is false', () => {
-    const onCloseMock = jest.fn();
-
-    const { container } = render(
-      <InfoModal visible={false} onClose={onCloseMock} />
-    );
-    console.log(container.firstChild);
-    // expect(container.firstChild).();
-  });
 });
