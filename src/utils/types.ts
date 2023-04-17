@@ -1,13 +1,13 @@
 export enum Paths {
-  Profiles = "/profiles",
-  Home = "/",
+  Profiles = '/profiles',
+  Home = '/',
 }
 
 export enum RequestMethods {
-  POST = "POST",
-  GET = "GET",
-  DELETE = "DELETE",
-  PUSH = "PUSH",
+  POST = 'POST',
+  GET = 'GET',
+  DELETE = 'DELETE',
+  PUSH = 'PUSH',
 }
 
 export enum ResponseStatus {
@@ -17,3 +17,13 @@ export enum ResponseStatus {
   BAD_REQUEST = 400,
   UNPROCESSABLE = 422,
 }
+
+export type MovieType = {
+  id: string;
+  title: string;
+  description: string;
+  videoUrl: string;
+  thumbnailUrl: string;
+  genre: string;
+  duration: string;
+};

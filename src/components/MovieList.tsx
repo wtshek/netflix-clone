@@ -1,8 +1,9 @@
-import { isEmpty } from "lodash";
-import MovieCard from "./MovieCard";
+import { isEmpty } from 'lodash';
+import MovieCard from './MovieCard';
+import { MovieType } from '@/utils/types';
 
 interface MovieListProps {
-  data: Record<string, any>[];
+  data: MovieType[];
   title: string;
 }
 

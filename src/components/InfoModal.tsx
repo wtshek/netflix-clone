@@ -1,16 +1,16 @@
-import { useCallback, useEffect, useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
-import PlayButton from "./PlayButton";
-import FavoriteButton from "./FavoriteButton";
-import useInfoModal from "@/hooks/useInfoModal";
-import useMovie from "@/hooks/useMovie";
+import { useCallback, useEffect, useState } from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
+import PlayButton from './PlayButton';
+import FavoriteButton from './FavoriteButton';
+import useInfoModal from '@/hooks/useInfoModal';
+import useMovie from '@/hooks/useMovie';
 
 const HANDLE_CLOSE_TIMEOUT = 300;
 const CLOSE_ICON_SIZE = 20;
 
 interface InfoModalProps {
   visible?: boolean;
-  onClose: any;
+  onClose: () => void;
 }
 
 const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
@@ -27,7 +27,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
     setTimeout(() => {
       onClose();
     }, HANDLE_CLOSE_TIMEOUT);
-  }, []);
+  }, [onClose]);
 
   if (!isVisible) return null;
 
@@ -36,7 +36,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
       <div className="relative w-auto mx-auto max-w-3xl rounded-md overflow-hidden">
         <div
           className={`${
-            isVisible ? "scale-100" : "scale-0"
+            isVisible ? 'scale-100' : 'scale-0'
           } transform duration-300 relative flex-auto bg-zinc-900 drop-shadow-md`}
         >
           <div className="relative h-96">
