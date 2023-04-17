@@ -1,10 +1,10 @@
-import useBillboard from "@/hooks/useBillboard";
-import { AiOutlineInfoCircle } from "react-icons/ai";
-import PlayButton from "./PlayButton";
-import useInfoModal from "@/hooks/useInfoModal";
-import { useCallback } from "react";
+import { useBillboard } from '@/hooks/useBillboard';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
+import PlayButton from '../PlayButton';
+import { useInfoModal } from '@/hooks/useInfoModal';
+import { useCallback } from 'react';
 
-const Billboard = () => {
+export const Billboard = () => {
   const { data } = useBillboard();
   const { openModal } = useInfoModal();
 
@@ -21,6 +21,7 @@ const Billboard = () => {
         autoPlay
         muted
         loop
+        data-testid="video"
       />
       <div className="absolute top-[30%] md:top-[40%] ml-4 md:ml-16">
         <p className="text-white text-1xl md:text-5xl h-full w-[50%] lg:text-6xl font-bold drop-shadow-xl">

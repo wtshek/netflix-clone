@@ -1,6 +1,6 @@
-import { BsFillPlayFill } from "react-icons/bs";
-import { useRouter } from "next/router";
-import { useCallback } from "react";
+import { BsFillPlayFill } from 'react-icons/bs';
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
 
 interface PlayButtonProps {
   movieId: string;
@@ -13,7 +13,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({ movieId }) => {
 
   const onClick = useCallback(() => {
     router.push(`/watch/${movieId}`);
-  }, []);
+  }, [movieId, router]);
   return (
     <button
       onClick={onClick}
