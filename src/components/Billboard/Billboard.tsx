@@ -2,11 +2,19 @@ import { useBillboard } from '@/hooks/useBillboard';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import { PlayButton } from '../PlayButton';
 import { useInfoModal } from '@/hooks/useInfoModal';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useLoader } from '../LoaderProvider';
+
+const LOADER_KEY = 'loader';
 
 export const Billboard = () => {
-  const { data } = useBillboard();
+  const { data, isLoading } = useBillboard();
   const { openModal } = useInfoModal();
+  const { queue } = useLoader();
+
+  useEffect(() => {
+    isLoading ? queue?.add(LOADER_KEY) : queue?.remove(LOADER_KEY);
+  }, [isLoading, queue]);
 
   const handleOpenModal = useCallback(() => {
     openModal(data?.id);

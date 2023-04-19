@@ -10,22 +10,24 @@ export class LoaderQueue {
     this.isLoaderShown = false;
   }
 
+  private hasItem(key: string) {
+    return this.queue.find((item) => item === key);
+  }
+
   add(key: string) {
-    console.log(key);
     if (!this.isLoaderShown) {
       this.loaderActions.showLoader();
-      console.log('calling loader');
       this.isLoaderShown = true;
     }
 
-    if (!this.queue.indexOf(key)) {
-      this.queue.push(key);
+    if (!this.hasItem(key)) {
+      this.queue.push(key as never);
     }
   }
 
   remove(key: string): void {
-    const currentIdIndex = this.queue.indexOf(key);
-    if (!!currentIdIndex) {
+    const currentIdIndex = this.queue.indexOf(key as never);
+    if (!this.hasItem(key)) {
       const queueList = this.queue.length ? `Current queue: ${this.queue}` : '';
 
       console.warn(
@@ -39,7 +41,6 @@ export class LoaderQueue {
 
     if (!this.queue.length) {
       this.isLoaderShown = false;
-      console.log('removing loader');
       this.loaderActions.hideLoader();
     }
   }
@@ -48,7 +49,7 @@ export class LoaderQueue {
     return this.queue;
   }
 
-  private queue: string[];
+  private queue = [];
   private loaderActions: LoaderActions;
   private isLoaderShown: boolean;
 }

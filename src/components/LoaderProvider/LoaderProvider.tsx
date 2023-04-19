@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
 import { ImSpinner2 } from 'react-icons/im';
 import { LoaderQueue } from './LoaderQueue';
 
@@ -10,29 +10,39 @@ const SPINNER_ICON_SIZE = 80;
 
 interface LoaderContextInterface {
   isLoaderShown: boolean;
-  addToLoaderQueue: (key: string) => void;
-  removeFromLoaderQueue: (key: string) => void;
-  loaderQueue: string[];
+  queue: LoaderQueue;
 }
 
 export const LoaderContext = createContext<LoaderContextInterface | undefined>(
   undefined
 );
 
+export const useLoader = () => {
+  const loader = useContext(LoaderContext);
+  if (!loader) {
+    throw new Error('useLoader must be used within a LoaderProvider');
+  }
+
+  return loader;
+};
+
 export const LoaderProvider: React.FC<LoaderProviderProps> = ({ children }) => {
   const [isLoaderShown, setIsLoaderShown] = useState(false);
-  const loaderAction = {
-    showLoader: () => setIsLoaderShown(true),
-    hideLoader: () => setIsLoaderShown(false),
-  };
-  const queue = new LoaderQueue(loaderAction);
+
+  const queue = useMemo(() => {
+    const loaderAction = {
+      showLoader: () => setIsLoaderShown(true),
+      hideLoader: () => setIsLoaderShown(false),
+    };
+    const queue = new LoaderQueue(loaderAction);
+
+    return queue;
+  }, []);
 
   return (
     <LoaderContext.Provider
       value={{
-        loaderQueue: queue.getQueue(),
-        addToLoaderQueue: queue.add,
-        removeFromLoaderQueue: queue.remove,
+        queue,
         isLoaderShown: isLoaderShown,
       }}
     >
