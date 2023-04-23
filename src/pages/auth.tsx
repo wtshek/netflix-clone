@@ -1,22 +1,22 @@
-import { Input } from "@/components/Input";
-import axios from "axios";
-import Image from "next/image";
-import { useCallback, useState } from "react";
-import { signIn } from "next-auth/react";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
-import { Paths } from "@/utils/types";
-import { LOGO_WIDTH, LOGO_HEIGHT } from "@/utils/constant";
+import { Input } from '@/components/Input';
+import axios from 'axios';
+import Image from 'next/image';
+import { useCallback, useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { FcGoogle } from 'react-icons/fc';
+import { FaGithub } from 'react-icons/fa';
+import { Paths } from '@/utils/types';
+import { LOGO_WIDTH, LOGO_HEIGHT } from '@/utils/constant';
 
 enum VariantEnum {
-  Login = "login",
-  Register = "register",
+  Login = 'login',
+  Register = 'register',
 }
 
 const Auth = () => {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const [variant, setVariant] = useState<VariantEnum>(VariantEnum.Login);
   const isLogin = variant === VariantEnum.Login;
@@ -30,7 +30,7 @@ const Auth = () => {
 
   const login = useCallback(async () => {
     try {
-      await signIn("credentials", {
+      await signIn('credentials', {
         email,
         password,
         redirect: false,
@@ -43,7 +43,7 @@ const Auth = () => {
 
   const register = useCallback(async () => {
     try {
-      await axios.post("/api/register", {
+      await axios.post('/api/register', {
         email,
         password,
         name: username,
@@ -55,10 +55,10 @@ const Auth = () => {
   }, [email, password, username, login]);
 
   const onGithubSignInClick = () => {
-    signIn("github", { callbackUrl: Paths.Profiles });
+    signIn('github', { callbackUrl: Paths.Profiles });
   };
   const onGoogleSignInClick = () => {
-    signIn("google", { callbackUrl: Paths.Profiles });
+    signIn('google', { callbackUrl: Paths.Profiles });
   };
 
   const onValueChange =
@@ -66,8 +66,8 @@ const Auth = () => {
       cb(e.target.value);
     };
   return (
-    <div className="relative h-full w-full bg-[url('/images/hero.jpeg')] bg-no-repeat bg-center bg-cover">
-      <div className="bg-black w-full h-full lg:bg-opacity-50">
+    <div className="relative h-screen w-screen bg-[url('/images/hero.jpeg')] bg-no-repeat bg-center bg-cover">
+      <div className="bg-black w-screen h-screen lg:bg-opacity-50">
         <nav className="px-12 py-5">
           <Image
             src="/images/logo.png"
@@ -80,7 +80,7 @@ const Auth = () => {
         <div className="flex justify-center">
           <div className="bg-black bg-opacity-70 px-16 py-16 self-center mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
             <h2 className="text-white text-4xl font-semibold mb-8">
-              {isLogin ? "Sign In" : "Register"}
+              {isLogin ? 'Sign In' : 'Register'}
             </h2>
             <div className="flex flex-col gap-4">
               {isRegister && (
@@ -111,7 +111,7 @@ const Auth = () => {
               onClick={isLogin ? login : register}
               className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
             >
-              {isLogin ? "Login" : "Sign up"}
+              {isLogin ? 'Login' : 'Sign up'}
             </button>
             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
@@ -123,13 +123,13 @@ const Auth = () => {
             </div>
             <p className="text-neutral-500 mt-12">
               {isLogin
-                ? "First time using Netflix?"
-                : "Already have an account?"}
+                ? 'First time using Netflix?'
+                : 'Already have an account?'}
               <span
                 className="text-white ml-1 hover:underline cursor-pointer"
                 onClick={toggleVariant}
               >
-                {isLogin ? "Create an account" : "Login"}
+                {isLogin ? 'Create an account' : 'Login'}
               </span>
             </p>
           </div>
